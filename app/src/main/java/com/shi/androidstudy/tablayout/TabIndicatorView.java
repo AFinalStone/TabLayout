@@ -20,7 +20,6 @@ import java.util.List;
 
 /**
  * 自定义的TabIndicator
- *
  * @author SHI
  * 2016年5月23日 14:04:44
  */

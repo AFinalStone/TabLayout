@@ -1,3 +1,5 @@
+>  本文接之前写的文章 [TabLayout控件的使用（一）](http://blog.csdn.net/abc6368765/article/details/51755118)
+
 我们在使用TabLayout控件的时候，有时候需要我们去修改下划线的长度，如何修改TabLayout控件的下划线长度呢？查阅官方文档API许久，没有找到合适的API接口，好吧，还是查阅TabLayout控件源码，用反射处理修改一下他的属性吧。
 
 主要用到的一个属性是一个名为mTabStrip的字段属性。

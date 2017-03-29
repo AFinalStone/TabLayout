@@ -6,10 +6,7 @@
 
 ![mTabStrip字段](/screen/1.png)
 
-- 大概讲述一下思路，我们通过反射获取到TabLayout的class，然后获取其中名字为
-mTabStrip的属性字段，接着设置该属性可以被访问setAccessible(true)，并获取到
-该属性对象，然后获取每个TabItem底部的下划线，依次修改其长度以及和TabItem左右
-两侧的距离，下面具体看代码吧。
+- 大概讲述一下思路，我们通过反射获取到TabLayout的class，然后获取其中名字为mTabStrip的属性字段，接着设置该属性可以被访问setAccessible(true)，并获取到该属性对象，然后获取每个TabItem底部的下划线，依次修改其长度以及和TabItem左右两侧的距离，下面具体看代码吧。
 
 ```java
 public class MainActivity extends AppCompatActivity {
@@ -121,6 +118,4 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-虽然修改下划线长度的目的实现了，但是有同学反馈修改之后滑动过程有抖动问题，暂时没有想到
-什么好的解决方法，说不定这也是为什么官方没有提供公开API修改下划线长度的原因吧，哈哈！
-如果实在无法忍受抖动问题，建议自定义个tablayout或者看看其他第三方tabLayout，网上蛮多的。
+虽然修改下划线长度的目的实现了，但是有同学反馈修改之后滑动过程有抖动问题，暂时没有想到什么好的解决方法，说不定这也是为什么官方没有提供公开API修改下划线长度的原因吧，哈哈！如果实在无法忍受抖动问题，建议自定义个tablayout或者看看其他第三方tabLayout，网上蛮多的。

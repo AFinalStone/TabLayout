@@ -1,18 +1,13 @@
 package com.shi.androidstudy.tablayout;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 

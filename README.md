@@ -6,7 +6,7 @@
 
 ![mTabStrip字段](/screen/1.png)
 
-- 大概讲述一下思路，我们通过反射获取到TabLayout的class，然后获取其中名字为mTabStrip的属性字段，接着设置该属性可以被访问setAccessible(true)，并获取到该属性对象，然后获取每个TabItem底部的下划线，依次修改其长度以及和TabItem左右两侧的距离，下面具体看代码吧。
+大概讲述一下思路，我们通过反射获取到TabLayout的class，然后获取其中名字为mTabStrip的属性字段，接着设置该属性可以被访问setAccessible(true)，并获取到该属性对象，然后获取每个TabItem底部的下划线，依次修改其长度以及和TabItem左右两侧的距离，下面具体看代码吧。
 
 ```java
 public class MainActivity extends AppCompatActivity {

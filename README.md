@@ -1,20 +1,15 @@
-package com.shi.androidstudy.tablayout;
+我们在使用TabLayout控件的时候，有时候需要我们去修改下划线的长度，如何修改TabLayout控件的下划线长度呢？查阅官方文档API许久，没有找到合适的API接口，好吧，还是查阅TabLayout控件源码，用反射处理修改一下他的属性吧。
 
-import android.content.Context;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
+主要用到的一个属性是一个名为mTabStrip的字段属性。
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+![mTabStrip字段](/screen/1.png)
 
+- 大概讲述一下思路，我们通过反射获取到TabLayout的class，然后获取其中名字为
+mTabStrip的属性字段，接着设置该属性可以被访问setAccessible(true)，并获取到
+该属性对象，然后获取每个TabItem底部的下划线，依次修改其长度以及和TabItem左右
+两侧的距离，下面具体看代码吧。
+
+```java
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -41,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        setIndicator(this,tabLayout,10,10);
+        setIndicator(this,tabLayout,40,40);
     }
 
     private class MyAdapter extends FragmentStatePagerAdapter {
@@ -91,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             //获取tabStrip这个字段对应的属性对象，
             //这里可以看出，tabayout底部的下划线应该是一个linearLayout或者linearLayout的子类
+            //看源码可知是一个继承自linearLayout叫作SlidingTabStrip的类
             ll_tab = (LinearLayout) tabStrip.get(tabs);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             View child = ll_tab.getChildAt(i);
             child.setPadding(0, 0, 0, 0);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
-            params.leftMargin =  left;
+            params.leftMargin = left;
             params.rightMargin = right;
             child.setLayoutParams(params);
             child.invalidate();
@@ -121,3 +117,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+```
+
+虽然修改下划线长度的目的实现了，但是有同学反馈修改之后滑动过程有抖动问题，暂时没有想到
+什么好的解决方法，说不定这也是为什么官方没有提供公开API修改下划线长度的原因吧，哈哈！
+如果实在无法忍受抖动问题，建议自定义个tablayout或者看看其他第三方tabLayout，网上蛮多的。
